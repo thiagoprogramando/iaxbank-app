@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('uuid')->unique();
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->foreignId('package_id')->constrained('product_package')->onDelete('cascade');
+            $table->foreignId('package_id')->constrained('product_packages')->onDelete('cascade');
             $table->decimal('amount', 15, 2);
             $table->decimal('profit_percent', 5, 2);
             $table->tinyInteger('status')->default(2);
