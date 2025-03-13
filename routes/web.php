@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Access\ForgoutController;
 use App\Http\Controllers\Access\LoginController;
 use App\Http\Controllers\Access\RegisterController;
 use App\Http\Controllers\AppController;
@@ -21,6 +22,10 @@ Route::post('logon', [LoginController::class, 'logon'])->name('logon');
 
 Route::get('register/{indicator?}', [RegisterController::class, 'register'])->name('register');
 Route::post('registrer', [RegisterController::class, 'registrer'])->name('registrer');
+
+Route::get('forgout/{code?}', [ForgoutController::class, 'index'])->name('forgout');
+Route::post('generate-code', [ForgoutController::class, 'generateCode'])->name('generate-code');
+Route::post('reset-password', [ForgoutController::class, 'resetPassword'])->name('reset-password');
 
 Route::middleware(['auth'])->group(function () {
 
