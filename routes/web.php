@@ -4,6 +4,7 @@ use App\Http\Controllers\Access\ForgoutController;
 use App\Http\Controllers\Access\LoginController;
 use App\Http\Controllers\Access\RegisterController;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Product\IncomeController;
 use App\Http\Controllers\Product\PackageController;
 use App\Http\Controllers\Product\ProductController;
@@ -33,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('trader/{uuid}', [TraderController::class, 'index'])->name('trader');
     Route::post('investiment-create', [TraderController::class, 'createInvestiment'])->name('investiment-create');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
     Route::get('products', [ProductController::class, 'index'])->name('products');
     Route::get('product-create', [ProductController::class, 'create'])->name('product-create');

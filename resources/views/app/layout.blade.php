@@ -245,7 +245,7 @@
                                                 </a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="" class="menu-link">
+                                                <a href="{{ route('cart') }}" class="menu-link">
                                                     <i class="menu-icon tf-icons ri-shopping-cart-2-line"></i>
                                                     <div data-i18n="Meus Investimentos">Meus Investimentos</div>
                                                 </a>
