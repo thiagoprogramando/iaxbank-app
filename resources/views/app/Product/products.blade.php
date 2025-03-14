@@ -42,9 +42,6 @@
                                         <a href="{{ route('product-show', ['uuid' => $product->uuid]) }}" class="btn btn-icon btn-outline-dark waves-effect">
                                             <i class="text-warning tf-icons ri-edit-line ri-22px"></i>
                                         </a>
-                                        <button type="button" class="btn btn-icon btn-outline-dark waves-effect">
-                                            <i class="text-primary tf-icons ri-file-list-line ri-22px"></i>
-                                        </button>
                                         <button type="submit" class="btn btn-icon btn-outline-dark waves-effect">
                                             <i class="text-danger tf-icons ri-delete-bin-4-line ri-22px"></i>
                                         </button>

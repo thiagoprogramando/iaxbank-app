@@ -174,17 +174,17 @@
                         @foreach ($packages as $package)
                             <tr>
                                 <td>
-                                    <span class="fw-medium text-primary">{{ $package->name }}</span>
+                                    <span class="fw-medium text-success">{{ $package->name }}</span>
                                     <p class="lead" title="{{ $package->description }}">{{ Str::limit($package->description, 60, '...') }}</p>
                                 </td>
                                 <td class="text-center">
                                     R$ {{ number_format($package->value, 2, ',', '.') }}
                                 </td>                                
                                 <td class="text-center">
-                                    10
+                                    {{ $package->investiments->where('status', 1)->count() }}
                                 </td>
                                 <td class="text-center">
-                                    R$ 85
+                                    R$ {{ number_format($package->investiments->where('status', 1)->sum('amount'), 2, ',', '.') }}
                                 </td>
                                 <td>
                                     {!! $package->labelStatus() !!}
@@ -197,9 +197,9 @@
                                             <a data-bs-toggle="modal" data-bs-target="#updatePackage{{ $package->id }}" class="btn btn-icon btn-outline-dark waves-effect">
                                                 <i class="text-warning tf-icons ri-edit-line ri-22px"></i>
                                             </a>
-                                            <button type="button" class="btn btn-icon btn-outline-dark waves-effect">
-                                                <i class="text-primary tf-icons ri-file-list-line ri-22px"></i>
-                                            </button>
+                                            <a href="{{ route('investiments', ['product' => $product->uuid]) }}?package_id{{ $package->id }}=&status=1" class="btn btn-icon btn-outline-dark waves-effect">
+                                                <i class="text-white tf-icons ri-file-list-line ri-22px"></i>
+                                            </a>
                                             <button type="submit" class="btn btn-icon btn-outline-dark waves-effect">
                                                 <i class="text-danger tf-icons ri-delete-bin-4-line ri-22px"></i>
                                             </button>

@@ -102,7 +102,7 @@
                         @foreach ($investiments as $investiment)
                             <tr>
                                 <td>
-                                    <span class="fw-medium text-primary">{{ $investiment->user->name }}</span> <br>
+                                    <span class="fw-medium text-success">{{ $investiment->user->name }}</span> <br>
                                     <small>{{ $investiment->user->email }}</small>
                                 </td>
                                  <td>
