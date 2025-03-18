@@ -253,6 +253,27 @@
                                         </ul>
                                     </li>
 
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0)" class="menu-link menu-toggle">
+                                            <i class="menu-icon tf-icons ri-wallet-line text-light"></i>
+                                            <div data-i18n="Carteira">Carteira</div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="{{ route('wallet', ['uuid' => Auth::user()->uuid]) }}" class="menu-link">
+                                                    <i class="menu-icon tf-icons ri-file-list-3-line"></i>
+                                                    <div data-i18n="Saldo & extrato">Saldo & extrato</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{{ route('transfer') }}" class="menu-link">
+                                                    <i class="menu-icon tf-icons ri-exchange-dollar-line"></i>
+                                                    <div data-i18n="Transferências">Transferências</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
                                     @if (Auth::user()->type == 1)
                                         <li class="menu-item">
                                             <a href="javascript:void(0)" class="menu-link menu-toggle">

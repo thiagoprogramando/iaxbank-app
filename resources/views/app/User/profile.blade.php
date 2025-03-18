@@ -5,16 +5,17 @@
       <div class="col-md-12">
         <div class="card mb-6">
           <div class="card-body">
-            <div class="d-flex align-items-start align-items-sm-center gap-6">
-                <img src="{{ Auth::user()->photo ?? asset('template/img/avatars/1.png') }}" alt="Perfil de {{ Auth::user()->name }}" class="d-block w-px-100 h-px-100 rounded-4" id="uploadedAvatar"/>
-                <div class="button-wrapper">
-                  <label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-                    <span class="d-none d-sm-block">Enviar Foto</span>
-                    <i class="ri-upload-2-line d-block d-sm-none"></i>
-                    <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
-                  </label>
-                </div>
-            </div>
+            <form id="avatarForm" action="{{ route('user-update', ['uuid' => $user->uuid]) }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <div class="text-center">
+                <img src="{{ Auth::user()->photo ? Storage::url(Auth::user()->photo) : asset('template/img/avatars/1.png') }}"
+                      alt="Perfil de {{ Auth::user()->name }}"
+                      class="d-block w-px-100 h-px-100 rounded-4"
+                      id="uploadedAvatar"
+                      style="cursor: pointer;"/>
+                  <input type="file" id="avatarInput" name="photo" accept="image/*" class="d-none">
+              </div>
+            </form>
           </div>
 
           <div class="card-body pt-0 row">
@@ -28,7 +29,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-floating form-floating-outline">
-                  <input class="form-control phone" type="text" name="phone" id="phone" value="{{ $user->phone }}"/>
+                  <input class="form-control phone" type="text" name="phone" id="phone" value="{{ $user->phone }}" oninput="maskPhone(this)"/>
                   <label for="phone">Telefone</label>
                 </div>
               </div>
@@ -40,7 +41,7 @@
               </div>
               <div class="col-md-12">
                 <div class="form-floating form-floating-outline">
-                  <input class="form-control cpfcnpj" type="text" name="cpfcnpj" id="cpfcnpj" value="{{ $user->cpfcnpj }}"/>
+                  <input class="form-control cpfcnpj" type="text" name="cpfcnpj" id="cpfcnpj" value="{{ $user->cpfcnpj }}" oninput="maskCpfCnpj(this)"/>
                   <label for="cpfcnpj">CPF/CNPJ</label>
                 </div>
               </div>
@@ -57,13 +58,13 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating form-floating-outline">
-                    <input class="form-control money" type="text" name="wallet" id="wallet" value="{{ $user->wallet }}"/>
+                    <input class="form-control money" type="text" name="wallet" id="wallet" value="{{ $user->wallet }}" oninput="maskValue(this)"/>
                     <label for="wallet">Carteira</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating form-floating-outline">
-                    <input class="form-control money" type="text" name="wallet_accumulated" id="wallet_accumulated" value="{{ $user->wallet_accumulated }}"/>
+                    <input class="form-control money" type="text" name="wallet_accumulated" id="wallet_accumulated" value="{{ $user->wallet_accumulated }}" oninput="maskValue(this)"/>
                     <label for="wallet_accumulated">Carteira Acumulada</label>
                   </div>
                 </div>
@@ -99,4 +100,16 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('uploadedAvatar').addEventListener('click', function () {
+        document.getElementById('avatarInput').click();
+    });
+
+    document.getElementById('avatarInput').addEventListener('change', function () {
+        if (this.files.length > 0) {
+            document.getElementById('avatarForm').submit();
+        }
+    });
+  </script>
 @endsection

@@ -10,8 +10,9 @@ use App\Http\Controllers\Product\PackageController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Trader\InvestimentController;
 use App\Http\Controllers\Trader\TraderController;
-use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Wallet\TransferController;
+use App\Http\Controllers\Wallet\WalletController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,6 +38,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
+    Route::get('wallet/{uuid}', [WalletController::class, 'index'])->name('wallet');
+    Route::get('wallet-investiment/{uuid}', [WalletController::class, 'walletInvestment'])->name('wallet-investiment');
+
+    Route::get('transfer', [TransferController::class, 'index'])->name('transfer');
+    Route::post('transfer-send', [TransferController::class, 'transferSend'])->name('transfer-send');
+
     Route::get('products', [ProductController::class, 'index'])->name('products');
     Route::get('product-create', [ProductController::class, 'create'])->name('product-create');
     Route::post('product-create', [ProductController::class, 'store'])->name('product-store');
@@ -58,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('income-delete', [IncomeController::class, 'delete'])->name('income-delete');
 
     Route::get('users', [UserController::class, 'users'])->name('users');
-    Route::get('user-show/{uuid}', [ProfileController::class, 'index'])->name('user-show');
+    Route::get('user-show/{uuid}', [UserController::class, 'index'])->name('user-show');
     Route::post('user-update/{uuid}', [UserController::class, 'update'])->name('user-update');
     Route::post('user-delete/{uuid}', [UserController::class, 'delete'])->name('user-delete');
 

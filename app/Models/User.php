@@ -58,6 +58,10 @@ class User extends Authenticatable {
         return $this->belongsTo(User::class, 'binary_right_id');
     }
 
+    public function investiments() {
+        return $this->hasMany(Investiment::class, 'user_id');
+    }
+
     public function labelName(): string {
         $nameParts = explode(' ', trim($this->name));
         return isset($nameParts[1]) ? "{$nameParts[0]} {$nameParts[1]}" : $nameParts[0];
