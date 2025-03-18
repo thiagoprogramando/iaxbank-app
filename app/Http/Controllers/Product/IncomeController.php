@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Product;
 use App\Models\ProductIncome;
-
+use App\Models\ProductPackage;
 use Illuminate\Http\Request;
 
 class IncomeController extends Controller {
@@ -36,9 +36,11 @@ class IncomeController extends Controller {
         }
 
         $incomes = $query->where('product_id', $product->id)->paginate(30);
+        $packages = ProductPackage::where('product_id', $product->id)->get();
         return view('app.Product.incomes', [
-            'incomes' => $incomes,
-            'product' => $product
+            'incomes'  => $incomes,
+            'product'  => $product,
+            'packages' =>$packages
         ]);
     }
 

@@ -6,7 +6,7 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <div>
                     <h5 class="card-title mb-1">Rendimentos</h5>
-                    <p class="text-muted mb-0">Os Rendimentos associados ao Produto/Pacote, estarão disponíveis aqui.</p>
+                    <p class="text-muted mb-0">Os Rendimentos associados ao Produto/Pacotes, estarão disponíveis aqui.</p>
                 </div>
             </div>
             <div class="card-body">
@@ -42,34 +42,28 @@
                             </div>
                             <div class="modal-body p-0">
                                 <div class="onboarding-content mb-0">
-                                    <h4 class="onboarding-title text-body">Dados do Pacote</h4>
-                                    <div class="onboarding-info">
-                                        Preencha os dados do Pacote
+                                    <h4 class="onboarding-title text-body">Dados do Rendimento</h4>
+                                    <div class="onboarding-info text-white mb-3">
+                                        Preencha os dados do Rendimento
                                     </div>
                                     @csrf
                                     <input type="hidden" name="product" value="{{ $product }}">
                                     <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="form-floating form-floating-outline mb-3">
-                                                <input type="text" name="name" class="form-control" id="name" placeholder="Nome:">
-                                                <label for="name">Nome:</label>
-                                            </div>
-                                            <div class="form-floating form-floating-outline mb-6">
-                                                <textarea name="description" class="form-control" style="min-height: 120px;" id="description" placeholder="Descrição:"></textarea>
-                                                <label for="description">Termos & Condições:</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="form-floating form-floating-outline mb-3">
-                                                <input type="text" name="value" class="form-control" id="value" placeholder="Valor:" oninput="maskValue(this)">
-                                                <label for="value">Valor:</label>
-                                            </div>
-                                        </div>
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-floating form-floating-outline mb-3">
                                                 <input type="text" name="performance" class="form-control" id="performance" placeholder="Rendimento (%):" oninput="maskPerformance(this)">
                                                 <label for="performance">Rendimento (%):</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-floating form-floating-outline mb-3">
+                                                <select name="package_id" class="form-select" id="status">
+                                                    <option value="" selected>Opções</option>
+                                                    @foreach ($packages as $package)
+                                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <label for="package_id">Pacotes</label>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
@@ -82,28 +76,6 @@
                                             <div class="form-floating form-floating-outline mb-3">
                                                 <input type="text" name="binary_right_percent" class="form-control performance" id="binary_right_percent" placeholder="Direita (Rede %):" oninput="maskPerformance(this)">
                                                 <label for="binary_right_percent">Direita (Rede %):</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="form-floating form-floating-outline mb-3">
-                                                <select name="time" class="form-select" id="time" required>
-                                                    <option selected>Opções</option>
-                                                    <option value="day">Diário</option>
-                                                    <option value="month">Mensal</option>
-                                                    <option value="semester">Semestral </option>
-                                                    <option value="year">Anual</option>
-                                                </select>
-                                                <label for="time">Modelo</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="form-floating form-floating-outline mb-3">
-                                                <select name="status" class="form-select" id="status" required>
-                                                    <option selected>Opções</option>
-                                                    <option value="1">Ativo</option>
-                                                    <option value="2">Inativo</option>
-                                                </select>
-                                                <label for="status">Status</label>
                                             </div>
                                         </div>
                                     </div>
@@ -126,26 +98,42 @@
                             </div>
                             <div class="modal-body p-0">
                                 <div class="onboarding-content mb-0">
-                                    <h4 class="onboarding-title text-body">Pesquisa de Pacotes</h4>
+                                    <h4 class="onboarding-title text-body">Pesquisa de Rendimentos</h4>
                                     @csrf
                                     <input type="hidden" name="product" value="{{ $product }}">
                                     <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-floating form-floating-outline mb-3">
-                                                <input type="text" name="name" class="form-control" id="name" placeholder="Nome:">
-                                                <label for="name">Nome:</label>
+                                                <input type="date" name="executed_at" class="form-control" id="executed_at" placeholder="Data de Execução:">
+                                                <label for="executed_at">Data de Execução:</label>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-floating form-floating-outline mb-3">
-                                                <select name="time" class="form-select" id="time">
+                                                <input type="date" name="created_at" class="form-control" id="created_at" placeholder="Data de cadastro:">
+                                                <label for="created_at">Data de cadastro:</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-floating form-floating-outline mb-3">
+                                                <select name="package_id" class="form-select" id="status">
                                                     <option value="" selected>Opções</option>
-                                                    <option value="day">Diário</option>
-                                                    <option value="month">Mensal</option>
-                                                    <option value="semester">Semestral </option>
-                                                    <option value="year">Anual</option>
+                                                    @foreach ($packages as $package)
+                                                        <option value="{{ $package->id }}">{{ $package->name }}</option>
+                                                    @endforeach
                                                 </select>
-                                                <label for="time">Modelo</label>
+                                                <label for="package_id">Pacotes</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-floating form-floating-outline mb-3">
+                                                <select name="status" class="form-select" id="status">
+                                                    <option value="" selected>Opções</option>
+                                                    <option value="1" selected>Executado</option>
+                                                    <option value="2" selected>Pendente</option>
+                                                    <option value="3" selected>Cancelado</option>
+                                                </select>
+                                                <label for="status">Status</label>
                                             </div>
                                         </div>
                                     </div>

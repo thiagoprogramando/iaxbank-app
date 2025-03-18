@@ -29,6 +29,10 @@ class ProductPackage extends Model {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
+    public function investiments() {
+        return $this->hasMany(Investiment::class, 'package_id');
+    }
+
     public function labelStatus() {
         switch ($this->status) {
             case '1':

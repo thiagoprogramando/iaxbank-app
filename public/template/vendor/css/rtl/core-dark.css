@@ -16131,7 +16131,7 @@ html:not([dir=rtl]) .card .card-separator {
 
 .text-body {
   --bs-text-opacity: 1;
-  color: rgb(31, 39, 251) !important;
+  color: #fff !important;
 }
 
 .text-muted {
